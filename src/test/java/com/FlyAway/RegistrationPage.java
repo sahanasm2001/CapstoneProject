@@ -9,7 +9,7 @@ public class RegistrationPage {
  private WebDriverWait wait;
  public RegistrationPage(WebDriver driver) {
      this.driver = driver;
-     this.wait = new WebDriverWait(driver, 50);
+     this.wait = new WebDriverWait(driver, 10);
  }
  private By loginsignupButton = By.xpath("/html/body/a[2]");
  private By notamembersignup = By.xpath("/html/body/form/table/tbody/tr[3]/td/a");
@@ -23,7 +23,6 @@ public class RegistrationPage {
 
  public void registerUser(String email_id, String password, String name, String address, String city) {
 	 driver.manage().window().maximize();
-//	 WebDriverWait wait = new WebDriverWait(driver, 10);
 	 driver.findElement(loginsignupButton).click();
 	 driver.findElement(notamembersignup).click();
      driver.findElement(emailidInput).sendKeys(email_id);

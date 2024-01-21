@@ -9,11 +9,11 @@ public class BookFlightPage {
 	WebDriverWait wait;
 	public  BookFlightPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, 50);
+		this.wait = new WebDriverWait(driver, 10);
 	}
 	
 public void bookflight() {
-//	WebDriverWait wait = new WebDriverWait(driver, 10);
+
 	driver.findElement(By.xpath("/html/body/table/tbody/tr[2]/td[6]/a")).click();
 }
 

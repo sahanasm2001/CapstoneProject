@@ -1,6 +1,5 @@
 package com.FlyAway;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,7 +20,7 @@ public class FlyAwayTest {
  public void setUp() {
      System.setProperty("webdriver.edge.driver", "C:\\Users\\sahmurth\\Downloads\\edgedriver_win64\\msedgedriver.exe");
      driver = new EdgeDriver();
-     WebDriverWait wait = new WebDriverWait(driver, 50);
+     WebDriverWait wait = new WebDriverWait(driver, 10);
      driver.get("http://localhost:8080/FlyAway/");  
      registrationPage = new RegistrationPage(driver);
      signInPage = new SignInPage(driver);
@@ -32,23 +31,22 @@ public class FlyAwayTest {
 
  @Test
  public void testFlyaway() {
-     // Registration
+     
      registrationPage.registerUser("admin@admin.com", "password", "admin", "BLR", "BLR");
 
-     // Sign-in
+    
      signInPage.signIn("admin@admin.com", "password");
 
-     // Search Flight
+     
      searchFlightPage.SearchFlight();
 
-     // Book Flight
+     
      bookingPage.bookflight();
 
-     // Confirm Booking
+     
      confirmationPage.confirmflight();
 
-     // Add assertions based on expected outcomes
-//     Assert.assertTrue(confirmationPage.isBookingConfirmed());
+     
  }
 
  @AfterClass

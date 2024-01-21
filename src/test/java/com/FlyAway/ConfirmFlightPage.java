@@ -10,7 +10,7 @@ public class ConfirmFlightPage {
 	
 	public  ConfirmFlightPage(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, 50);
+		this.wait = new WebDriverWait(driver, 10);
 	}
 
 	public void confirmflight() {
@@ -20,23 +20,5 @@ public class ConfirmFlightPage {
 	}
 
 }
-//ConfirmationPage.java
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
-//
-//public class ConfirmFlightPage {
-// private WebDriver driver;
-//
-// public ConfirmFlightPage(WebDriver driver) {
-//     this.driver = driver;
-// }
-//
-// private By confirmationMessage = By.xpath("/html/body/a[6]");
-//
-// public String getConfirmationMessage() {
-//     return driver.findElement(confirmationMessage).getText();
-// }
-//
-//
-//}
+
 
