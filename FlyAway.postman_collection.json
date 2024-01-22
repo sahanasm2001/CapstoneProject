@@ -1,0 +1,269 @@
+{
+	"info": {
+		"_postman_id": "0760aade-7e3b-492d-a507-5b980c5ee8d4",
+		"name": "FlyAway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31859057"
+	},
+	"item": [
+		{
+			"name": "LoginPage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/login",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginAction",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"     pm.expect(pm.response.text()).to.include(\"Logout\");\r",
+							"    console.log(pm.response.text());\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/loginaction?email_id=sahana@gmail.com&pwd=sahana",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"loginaction"
+					],
+					"query": [
+						{
+							"key": "email_id",
+							"value": "sahana@gmail.com"
+						},
+						{
+							"key": "pwd",
+							"value": "sahana"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HomePage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"FlyAway 2019\");\r",
+							"    console.log(pm.response.text());\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/home",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchFlight",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"AirAsia\");\r",
+							"    console.log(pm.response.text());\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get book id\", function(){\r",
+							"    const resp = cheerio.load(responseBody);\r",
+							"    resp(\"a[href^='book']\").attr('href');\r",
+							"    console.log(resp(\"a[href^='book']\").attr('href'));\r",
+							"    pm.collectionVariables.set(\"flight_id\", resp(\"a[href^='book']\").attr('href'));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/home?source=1&destination=4",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"home"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "1"
+						},
+						{
+							"key": "destination",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BookFlight",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"confirm your flight\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/{{flight_id}}",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"{{flight_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConfirmRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"has been booked\");\r",
+							"    console.log(pm.response.text());\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/completepurchase",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"completepurchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SeeBookings",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Date Of Booking\");\r",
+							"    console.log(pm.response.text());\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{FA_URL}}/memberbookings",
+					"host": [
+						"{{FA_URL}}"
+					],
+					"path": [
+						"memberbookings"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "flight_id",
+			"value": ""
+		}
+	]
+}
