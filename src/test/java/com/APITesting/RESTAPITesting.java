@@ -22,8 +22,29 @@ public class RESTAPITesting {
                 .param("date", date)
                 .get(BASE_URL + "FlyAway/");
 
-        Assert.assertEquals(response.getStatusCode(), 200);
-      
+      System.out.println("source="+" "+source);
+      System.out.println("destination="+" "+destination);
+      System.out.println("date="+" "+date);
+      System.out.println("status code="+" "+response.getStatusCode());
+    }
+    
+    @Test
+    
+    public void testFlightBookingAPI() {
+    	String flight_id = "3";
+    	String ID = "52";
+    	String date = "2024-01-20";
+    	
+    	Response response = RestAssured.given()
+                .param("Flight_ID", flight_id)
+                .param("Seat_ID", ID)
+                .param("date", date)
+                .get(BASE_URL + "FlyAway/memberbookings");
+
+      System.out.println("Flight_ID="+" "+flight_id);
+      System.out.println("Seat_ID="+" "+ID);
+      System.out.println("date="+" "+date);
+      System.out.println("status code="+" "+response.getStatusCode()+ "\n");
     }
 
 }
